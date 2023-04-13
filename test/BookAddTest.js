@@ -25,8 +25,8 @@ describe("Add Books Testing API", () => {
 
             //Post the new Book
             const response = await axios.post(url, nBook);
-            let nBook;
-            nBook = response.data;
+            let book_a;
+            book_a = response.data;
             expect(response.status).to.equal(StatusCodes.OK);
 
 
@@ -44,7 +44,7 @@ describe("Add Books Testing API", () => {
 
         after(async()=>{
 
-            await axios.delete(url+"/"+nBook.id);
+            await axios.delete(url+"/"+newBook.id);
         })
     });
 
