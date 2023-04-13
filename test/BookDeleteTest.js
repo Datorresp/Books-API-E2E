@@ -38,6 +38,6 @@ describe("Delete Books Testing API", () => {
 
             const responseDeleteAgain = await axios.delete(url+'/'+book_a.id);
             expect(responseDeleteAgain.status).to.equal(StatusCodes.BAD_REQUEST);
-        });
+        };
     });
 });
