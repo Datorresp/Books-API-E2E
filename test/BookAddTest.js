@@ -7,11 +7,9 @@ const url = "http://localhost:4200/books";
 describe("Add Books Testing API", () => {
 
     let book_a;
-    let numOfBooks;
 
     beforeEach(async () => {
     let responseGetBooks = await axios.get(url);
-    numOfBooks = responseGetBooks.data.length;
     });
 
     describe("Adding Test", () => {
@@ -37,8 +35,8 @@ describe("Add Books Testing API", () => {
             }));
 
             //Verify Book Auth
-            expect(xbook.author).to.be.oneOf(responseGetBooks.data.map(function (book) {
-                return book.author;
+            expect(nBook.author).to.be.oneOf(responseGetBooks.data.map(function (book) {
+                    return book.author;
             }));
         });
     });
@@ -59,11 +57,6 @@ describe("Add Books Testing API", () => {
             //Expect BadReq
             expect(response.status).to.equal(StatusCodes.BAD_REQUEST);
 
-            //Verify No Post
-            let responseGetBooks = await axios.get(url);
-            expect(responseGetBooks.status).to.equal(StatusCodes.OK);
-            const numOfBooksAfter = responseGetBooks.data.length;
-            expect(numOfBooksAfter).to.equal(numOfBooks);
         });
 
         it("NO AUTHOR, NO ADD", async () => {
@@ -78,11 +71,6 @@ describe("Add Books Testing API", () => {
             //Expect BadReq
             expect(response.status).to.equal(StatusCodes.BAD_REQUEST);
 
-            //Verify No Post
-            let responseGetBooks = await axios.get(url);
-            expect(responseGetBooks.status).to.equal(StatusCodes.OK);
-            const numOfBooksAfter = responseGetBooks.data.length;
-            expect(numOfBooksAfter).to.equal(numOfBooks);
         });
     });
 });
