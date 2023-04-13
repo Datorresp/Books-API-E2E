@@ -50,7 +50,7 @@ describe("Add Books Testing API", () => {
 
     describe("No Adding Test", () => {
 
-        it("BUG: Create book with no title", async () => {
+        it("NO NAME, NO ADD", async () => {
 
             let book_a = {
 
@@ -71,7 +71,7 @@ describe("Add Books Testing API", () => {
             expect(numOfBooksAfter).to.equal(numOfBooks);
         });
 
-        it("BUG: Create book with no author", async () => {
+        it("NO AUTHOR, NO ADD", async () => {
             let book_b = {
                 id: "2123787f-202e-413a-8325-a9e92b3313c0",
                 name: "IT",
