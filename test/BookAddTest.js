@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { expect, assert } = require("chai");
 const { StatusCodes } = require("http-status-codes");
-const url = "http://localhost:4200/books";
+const urlBase = "http://localhost:4200/books";
 
 
 describe("Add Books Testing API", () => {
@@ -9,7 +9,7 @@ describe("Add Books Testing API", () => {
     let book_a;
 
     beforeEach(async () => {
-    let responseGetBooks = await axios.get(url);
+    let responseGetBooks = await axios.get(urlBase);
     });
 
     describe("Adding Test", () => {
@@ -23,7 +23,7 @@ describe("Add Books Testing API", () => {
             };
 
             //Post the new Book
-            const response = await axios.post(url, nBook);
+            const response = await axios.post(urlBase, nBook);
             book_a = response.data;
             expect(response.status).to.equal(StatusCodes.OK);
 
@@ -39,11 +39,8 @@ describe("Add Books Testing API", () => {
                     return book.author;
             }));
         });
-    });
 
-    describe("No Adding Test", () => {
-
-        it("NO NAME, NO ADD", async () => {
+         it("NO NAME, NO ADD", async () => {
 
             let book_a = {
 
@@ -53,7 +50,7 @@ describe("Add Books Testing API", () => {
             };
 
             //Post Book no Name
-            const response = await axios.post(url, book_a);
+            const response = await axios.post(urlBase, book_a);
             //Expect BadReq
             expect(response.status).to.equal(StatusCodes.BAD_REQUEST);
 
@@ -67,7 +64,7 @@ describe("Add Books Testing API", () => {
             };
 
             //Post Book no auth
-            const response = await axios.post(url, book_b);
+            const response = await axios.post(urlBase, book_b);
             //Expect BadReq
             expect(response.status).to.equal(StatusCodes.BAD_REQUEST);
 

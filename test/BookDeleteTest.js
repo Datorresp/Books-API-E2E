@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { expect, assert } = require("chai");
 const { StatusCodes } = require("http-status-codes");
-const url = "http://localhost:4200/books";
+const urlBase = "http://localhost:4200/books";
 
 describe("Delete Books Testing API", () => {
 
@@ -17,7 +17,7 @@ describe("Delete Books Testing API", () => {
         };
 
         //Creating Book
-        let response= await axios.post(url, nBook);
+        let response= await axios.post(urlBase, nBook);
         book_a = response.data;
     });
 
@@ -26,22 +26,19 @@ describe("Delete Books Testing API", () => {
         it("Delete Book", async () => {
 
             //verify deletion
-            const response = await axios.delete(url+"/"+book_a.id);
+            const response = await axios.delete(urlBase+"/"+book_a.id);
             expect(response.status).to.equal(StatusCodes.OK);
         });
-    });
 
-    describe("No Delete Test", () => {
-
-        it("NO DELETE"), async () => {
+        it("NO DOUBLE DELETE"), async () => {
 
             //Verify Normal Deletion
-            const response = await axios.delete(url+'/'+book_a.id);
+            const response = await axios.delete(urlBase+'/'+book_a.id);
             expect(response.status).to.equal(StatusCodes.OK);
 
             //Verify No Deletion
-            const responseDeleteAgain = await axios.delete(url+'/'+book_a.id);
-            expect(responseDeleteAgain.status).to.equal(StatusCodes.BAD_REQUEST);
+            const response2 = await axios.delete(urlBase+'/'+book_a.id);
+            expect(response2.status).to.equal(StatusCodes.BAD_REQUEST);
         };
     });
 });
