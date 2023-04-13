@@ -6,6 +6,7 @@ const url = "http://localhost:4200/books";
 
 describe("Add Books Testing API", () => {
 
+    let book_a;
     let numOfBooks;
 
     beforeEach(async () => {
@@ -25,7 +26,6 @@ describe("Add Books Testing API", () => {
 
             //Post the new Book
             const response = await axios.post(url, nBook);
-            let book_a;
             book_a = response.data;
             expect(response.status).to.equal(StatusCodes.OK);
 
@@ -41,11 +41,6 @@ describe("Add Books Testing API", () => {
                 return book.author;
             }));
         });
-
-        after(async()=>{
-
-            await axios.delete(url+"/"+newBook.id);
-        })
     });
 
     describe("No Adding Test", () => {
